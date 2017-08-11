@@ -1,12 +1,10 @@
 pipeline {
     agent any
     stages {
-        stage('Example') {
-            steps {
-                nodejs(nodeJSInstallationName: 'Node 6.x', configId: '<config-file-provider-id>') {
-                    sh 'npm config ls'
-                }
-            }
+        stage('Initialize') {
+            echo 'Initializing...'
+            def node = tool name: 'Node-7.4.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+            env.PATH = "${node}/bin:${env.PATH}"
         }
     }
 }
